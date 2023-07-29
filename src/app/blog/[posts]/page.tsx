@@ -1,24 +1,10 @@
 import Card from "@/components/Card";
 import PageHeader from "@/components/PageHeader";
-import { getSinglePost, parseFrontmatter } from "@/lib/utils/mdParser";
+import { getPostData, getSinglePost, parseFrontmatter } from "@/lib/utils/mdParser";
 import path from "path";
 import fs from 'fs';
 import matter from "gray-matter";
 
-
-const contentDirectory = "public/content";
-
-export async function getPostData(fileName:string) {
-    const fullPath = path.join(contentDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { content, data: frontmatter } = matter(fileContents);
-
-    return {
-    frontmatter:parseFrontmatter(frontmatter),
-    content,
-    };
-
-  }
 
 const page = async ({ params } : { params: {posts:string}}) => {
 
