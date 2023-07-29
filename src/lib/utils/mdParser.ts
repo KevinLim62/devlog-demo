@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const contentDirectory = 'src/content';
+const contentDirectory = 'content';
 
 const parseFrontmatter = (frontmatter: any) => {
   const frontmatterString = JSON.stringify(frontmatter);

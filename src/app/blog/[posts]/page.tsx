@@ -5,7 +5,7 @@ import path from "path";
 import fs from 'fs';
 import matter from "gray-matter";
 
-    const contentDirectory = "src/content";
+    const contentDirectory = "content";
 
     // Helper function to read file content
     const readFile = (filePath: string) => {
@@ -16,7 +16,7 @@ import matter from "gray-matter";
 
     
     const fileName = `blog/${params.posts}.md`;
-    const fullPath = path.join(__dirname,contentDirectory,fileName);
+    const fullPath = path.join(contentDirectory,fileName);
     console.log(fileName,fullPath);
 
     const pageData = readFile(fullPath);
