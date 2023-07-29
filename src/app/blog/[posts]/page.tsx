@@ -17,7 +17,9 @@ interface PostProps {
 
 
 const page = async ({ params }: {params: {posts:string}} ) => {
-    
+   
+  const postTest = await getPostData(`blog/${params.posts}.md`);    
+
   const posts = {
     frontmatter: {
         title: "test",
