@@ -8,7 +8,7 @@ import matter from "gray-matter";
 
 const contentDirectory = "public/content";
 
-  export async function getPostData(fileName:string) {
+export async function getPostData(fileName:string) {
     const fullPath = path.join(contentDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { content, data: frontmatter } = matter(fileContents);
@@ -20,22 +20,10 @@ const contentDirectory = "public/content";
 
   }
 
-  export async function getStaticProps({ params }: { params: {posts:string}}) {
-    // Add the "await" keyword like this:
-    const postData = await getPostData(`blog/${params.posts}`);
+const page = async ({ params } : { params: {posts:string}}) => {
+
+  const postsTest = await getPostData(`blog/${params.posts}`);
   
-    return {
-      props: {
-        postData,
-      },
-    };
-  }
-
-const page = ({ postData } : {postData: {
-    frontmatter: any;
-    content: string;
-}}) => {
-
   const posts = {
     frontmatter: {
         title: "test",
@@ -52,7 +40,7 @@ const page = ({ postData } : {postData: {
   return (
     posts && (
       <div className='w-full px-[10%] py-10'>
-          {/* <PageHeader title={params.posts}/> */}
+          <PageHeader title={params.posts}/>
           <Card frontmatter={posts.frontmatter} content={`ddddd`} isSinglePost/>
       </div>
     )
