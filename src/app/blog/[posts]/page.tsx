@@ -16,27 +16,7 @@ interface PostProps {
   }
 
 
-export const getServerSideProps: GetServerSideProps<PostProps> = async ({ params }) => {
-    
-    
-    let postData
-
-    if (params && 'posts' in params) {
-      const { posts } = params as ParsedUrlQuery;
-      // Fetch post data using getPostData function
-      postData = await getPostData(`blog/${params.posts}`);
-  
-      // You should add proper error handling here if the post data is not found.
-    }
-    return {
-      props: {
-        postData,
-      },
-    };
-};
-
-
-const page = async ({ postData }: PostProps) => {
+const page = async ({ params }: {params: {posts:string}} ) => {
     
   const posts = {
     frontmatter: {
@@ -52,12 +32,10 @@ const page = async ({ postData }: PostProps) => {
 } 
 
 return (
-    postData && (
         <div className='w-full px-[10%] py-10'>
-          <PageHeader title={postData.content}/>
-          <Card frontmatter={posts.frontmatter} content={`ddddd`} isSinglePost/>
+          <PageHeader title={params.posts}/>
+          {/* <Card frontmatter={posts.frontmatter} content={`ddddd`} isSinglePost/> */}
       </div>
-    )
     )
 }
 
