@@ -1,28 +1,41 @@
 import Card from "@/components/Card";
 import PageHeader from "@/components/PageHeader";
-import { getSinglePost } from "@/lib/utils/mdParser";
+import { getSinglePost, parseFrontmatter } from "@/lib/utils/mdParser";
 import path from "path";
 import fs from 'fs';
 import matter from "gray-matter";
 
-    const contentDirectory = "public/content";
 
-    // Helper function to read file content
-    // const readFile = (filePath: string) => {
-    //     return fs.readFileSync(filePath, "utf-8");
-    // };
+const contentDirectory = "public/content";
 
-    const page = ({ params } : { params: {posts:string}}) => {
+  export async function getPostData(fileName:string) {
+    const fullPath = path.join(contentDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { content, data: frontmatter } = matter(fileContents);
 
-    
-    const fileName = `blog/${params.posts}.md`;
-    const fullPath = path.join(contentDirectory,fileName);
+    return {
+    frontmatter:parseFrontmatter(frontmatter),
+    content,
+    };
 
-    // const pageData = readFile(fullPath);
+  }
 
-    // const { content, data: frontmatter } = matter(pageData);
-    //const postsTest = getSinglePost(`blog/${params.posts}`);
+  export async function getStaticProps({ params }: { params: {posts:string}}) {
+    // Add the "await" keyword like this:
+    const postData = await getPostData(`blog/${params.posts}`);
   
+    return {
+      props: {
+        postData,
+      },
+    };
+  }
+
+const page = ({ postData } : {postData: {
+    frontmatter: any;
+    content: string;
+}}) => {
+
   const posts = {
     frontmatter: {
         title: "test",
@@ -39,7 +52,7 @@ import matter from "gray-matter";
   return (
     posts && (
       <div className='w-full px-[10%] py-10'>
-          <PageHeader title={params.posts}/>
+          {/* <PageHeader title={params.posts}/> */}
           <Card frontmatter={posts.frontmatter} content={`ddddd`} isSinglePost/>
       </div>
     )

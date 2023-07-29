@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 
 
 
-const parseFrontmatter = (frontmatter: any) => {
+export const parseFrontmatter = (frontmatter: any) => {
   const frontmatterString = JSON.stringify(frontmatter);
   return JSON.parse(frontmatterString);
 };
