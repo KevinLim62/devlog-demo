@@ -12,11 +12,14 @@ export const getSinglePost = async (fileName:string) =>{
   const contentDirectory = 'src/content';
   const fullPath = `${contentDirectory}/${fileName}.md`;
   const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { content, data: frontmatter } = matter(fileContents);
+  console.log(matter(fileContents));
+  //const { content, data: frontmatter } = matter(fileContents);
   
   return {
-    frontmatter:parseFrontmatter(frontmatter),
-    content,
+    // frontmatter:parseFrontmatter(frontmatter),
+    // content,
+    frontmatter: parseFrontmatter(null),
+    content: null,
   };
 };
 
