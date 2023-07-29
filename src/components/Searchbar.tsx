@@ -43,7 +43,7 @@ const Searchbar:React.FC<SearchbarProps> = ({ searchList }) => {
             <div className="lg:w-full space-y-5">
                 <div className="grid grid-flow-row grid-cols-2 gap-5 mx-5">    
                     {searchResults && searchResults.map((post) => (
-                        <Link key={post.fileName} href={`/blog/${post.fileName}`}>
+                        <Link key={post.fileName} href={`/${post.fileName}`}>
                             <Card frontmatter={post.frontmatter} content={post.content}/>
                         </Link>
                     ))}
