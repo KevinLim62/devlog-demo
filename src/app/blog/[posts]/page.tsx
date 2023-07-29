@@ -3,8 +3,9 @@ import PageHeader from "@/components/PageHeader";
 import { getSinglePost } from "@/lib/utils/mdParser";
 
 
-const page = ({ params } : { params: {posts:string}}) => {
-  const posts = getSinglePost(`blog/${params.posts}`);
+const page = async ({ params } : { params: {posts:string}}) => {
+  
+  const posts = await getSinglePost(`blog/${params.posts}`);
 
   return (
     posts && (

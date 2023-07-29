@@ -9,11 +9,11 @@ import { getAllTaxonomy, getTaxonomy } from "@/lib/utils/taxonomParser";
 const pagination = 4;
 const blog_folder = "blog";
 
-const page =  () => {
+const page = async () => {
        const allCategories = getAllTaxonomy(blog_folder, "categories");
        const categories = getTaxonomy(blog_folder, "categories");
        const tags = getTaxonomy(blog_folder, "tags");
-       const postIndex =  getSinglePost("_index");
+       const postIndex =  await getSinglePost("_index");
        const posts =  getAllPosts("blog");
        const totalPages = Math.ceil(posts.length / pagination);
        

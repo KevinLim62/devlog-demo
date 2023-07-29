@@ -8,7 +8,7 @@ const parseFrontmatter = (frontmatter: any) => {
   return JSON.parse(frontmatterString);
 };
 
-export const getSinglePost = (fileName:string) =>{
+export const getSinglePost = async (fileName:string) =>{
   const contentDirectory = 'src/content';
   const fullPath = `${contentDirectory}/${fileName}.md`;
   const fileContents = fs.readFileSync(fullPath, 'utf8');
