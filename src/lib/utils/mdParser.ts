@@ -40,8 +40,9 @@ export const getAllPosts = (folderName:string) => {
 };
 
 export async function getPostData(fileName:string) {
-  const contentDirectory = 'public/content';
-  const fullPath = path.join(contentDirectory, fileName);
+
+  const postsDirectory = path.join(process.cwd(), 'public/content');
+  const fullPath = path.join(postsDirectory, fileName);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { content, data: frontmatter } = matter(fileContents);
 
