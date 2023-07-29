@@ -11,7 +11,7 @@ const page = async ({ params }: {params: {posts:string}} ) => {
 return (
         <div className='w-full px-[10%] py-10'>
           <PageHeader title={params.posts}/>
-          <Card frontmatter={posts.frontmatter} content={`ddddd`} isSinglePost/>
+          <Card frontmatter={posts.frontmatter} content={posts.content} isSinglePost/>
       </div>
     )
 }
