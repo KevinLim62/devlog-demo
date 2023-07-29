@@ -8,9 +8,9 @@ import matter from "gray-matter";
     const contentDirectory = "public/content";
 
     // Helper function to read file content
-    const readFile = (filePath: string) => {
-        return fs.readFileSync(filePath, "utf-8");
-    };
+    // const readFile = (filePath: string) => {
+    //     return fs.readFileSync(filePath, "utf-8");
+    // };
 
     const page = ({ params } : { params: {posts:string}}) => {
 
@@ -18,10 +18,9 @@ import matter from "gray-matter";
     const fileName = `blog/${params.posts}.md`;
     const fullPath = path.join(contentDirectory,fileName);
 
+    // const pageData = readFile(fullPath);
 
-    const pageData = readFile(fullPath);
-
-    const { content, data: frontmatter } = matter(pageData);
+    // const { content, data: frontmatter } = matter(pageData);
     //const postsTest = getSinglePost(`blog/${params.posts}`);
   
   const posts = {
