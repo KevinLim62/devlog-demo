@@ -27,7 +27,7 @@ const PostSidebar:React.FC<PostSidebarProps> = ({
                   
                   <Link 
                     className="flex justify-between cursor-pointer text-black hover:text-slate-100"
-                    href={`/category/${category}`}
+                    href={`/categories/${category}`}
                     >
                     {category} <span>({count})</span>
                   </Link>
@@ -47,7 +47,7 @@ const PostSidebar:React.FC<PostSidebarProps> = ({
                 <li className="inline-block" key={tag}>
                   <Link
                     className="m-1 block rounded cursor-pointer text-white px-2 hover:bg-white hover:text-black"
-                    href={`/tag/${tag}`}
+                    href={`/tags/${tag}`}
                     >
                     {tag}
                   </Link>

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-
+const postsDirectory = path.join(process.cwd(), 'src/content');
 
 export const parseFrontmatter = (frontmatter: any) => {
   const frontmatterString = JSON.stringify(frontmatter);
@@ -10,8 +10,7 @@ export const parseFrontmatter = (frontmatter: any) => {
 };
 
 export const getSinglePost = (fileName:string) =>{
-  const contentDirectory = 'public/content';
-  const fullPath = path.join(contentDirectory,fileName);
+  const fullPath = path.join(postsDirectory,fileName);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { content, data: frontmatter } = matter(fileContents);
   
@@ -22,12 +21,12 @@ export const getSinglePost = (fileName:string) =>{
 };
 
 export const getAllPosts = (folderName:string) => {
-  const contentDirectory = `public/content/${folderName}`;
-  const files = fs.readdirSync(contentDirectory);
+  const fullPath = path.join(postsDirectory,folderName);
+  const files = fs.readdirSync(fullPath);
 
   const posts = files.map((file) => {
   const fileName = file.replace('.md', '');
-  const { content, data: frontmatter } = matter(fs.readFileSync(path.join(contentDirectory, file), 'utf8'));
+  const { content, data: frontmatter } = matter(fs.readFileSync(path.join(fullPath, file), 'utf8'));
       
     return {
       frontmatter:parseFrontmatter(frontmatter),
@@ -38,18 +37,4 @@ export const getAllPosts = (folderName:string) => {
 
   return posts;
 };
-
-export async function getPostData(fileName:string) {
-
-  const postsDirectory = path.join(process.cwd(), 'public/content');
-  const fullPath = path.join(postsDirectory, fileName);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { content, data: frontmatter } = matter(fileContents);
-
-  return {
-  frontmatter:parseFrontmatter(frontmatter),
-  content,
-  };
-
-}
 

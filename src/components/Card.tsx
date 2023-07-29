@@ -23,7 +23,7 @@ const Card:React.FC<Post> = ({
                     height={100}
                     quality={40}
                     style={{
-                    width:'100%',
+                    width:'80%',
                     height:'auto',
                     }}
                 />
@@ -47,7 +47,7 @@ const Card:React.FC<Post> = ({
             <div className={`${isSinglePost? "h-full text-justify": "h-[150px] overflow-hidden text-ellipsis"}`}>
                 {content}
             </div>
-            {!isSinglePost && (
+            {isSinglePost && (
                 <div>
                 <button className="rounded-md border-2 border-slate-200 py-1 px-2 hover:text-black hover:bg-white transition-colors duration-200">Read More</button>  
                 </div>

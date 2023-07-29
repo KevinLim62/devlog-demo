@@ -10,6 +10,7 @@ const pagination = 4;
 const blog_folder = "blog";
 
 const page = () => {
+    
        const allCategories = getAllTaxonomy(blog_folder, "categories");
        const categories = getTaxonomy(blog_folder, "categories");
        const tags = getTaxonomy(blog_folder, "tags");
