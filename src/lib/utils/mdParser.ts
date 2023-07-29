@@ -22,7 +22,7 @@ export const getSinglePost = (fileName:string) =>{
 };
 
 export const getAllPosts = (folderName:string) => {
-  const contentDirectory = `/content/${folderName}`;
+  const contentDirectory = `content/${folderName}`;
   const files = fs.readdirSync(contentDirectory);
 
   const posts = files.map((file) => {
