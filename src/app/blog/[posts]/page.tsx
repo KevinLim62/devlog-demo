@@ -3,9 +3,23 @@ import PageHeader from "@/components/PageHeader";
 import { getSinglePost } from "@/lib/utils/mdParser";
 
 
-const page = async ({ params } : { params: {posts:string}}) => {
+const page = ({ params } : { params: {posts:string}}) => {
+  console.log("params is ",params.posts);
+  const postsTest = getSinglePost(`blog/${params.posts}`);
+  console.log(postsTest)
   
-  const posts = await getSinglePost(`blog/${params.posts}`);
+  const posts = {
+    frontmatter: {
+        title: "test",
+        meta_title: "string",
+        description: "string",
+        image: "string",
+        categories: ["string1","string2","string3"],
+        author: "string",
+        tags: ["string1","string2","string3"],
+    },
+    content:"string"
+  } 
 
   return (
     posts && (

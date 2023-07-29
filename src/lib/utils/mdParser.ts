@@ -8,18 +8,15 @@ const parseFrontmatter = (frontmatter: any) => {
   return JSON.parse(frontmatterString);
 };
 
-export const getSinglePost = async (fileName:string) =>{
+export const getSinglePost = (fileName:string) =>{
   const contentDirectory = 'src/content';
   const fullPath = `${contentDirectory}/${fileName}.md`;
   const fileContents = fs.readFileSync(fullPath, 'utf8');
-  console.log(matter(fileContents));
-  //const { content, data: frontmatter } = matter(fileContents);
+  const { content, data: frontmatter } = matter(fileContents);
   
   return {
-    // frontmatter:parseFrontmatter(frontmatter),
-    // content,
-    frontmatter: parseFrontmatter(null),
-    content: null,
+    frontmatter:parseFrontmatter(frontmatter),
+    content,
   };
 };
 
