@@ -15,8 +15,8 @@ import matter from "gray-matter";
     const page = ({ params } : { params: {posts:string}}) => {
 
     
-    const fileName = `/blog/${params.posts}.md`;
-    const fullPath = path.join(contentDirectory,fileName);
+    const fileName = `blog/${params.posts}.md`;
+    const fullPath = path.join(__dirname,contentDirectory,fileName);
     console.log(fileName,fullPath);
 
     const pageData = readFile(fullPath);
