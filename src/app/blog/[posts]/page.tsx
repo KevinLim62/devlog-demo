@@ -5,8 +5,8 @@ import { getSinglePost } from "@/lib/utils/mdParser";
 
 const page = ({ params } : { params: {posts:string}}) => {
   console.log("params is ",params.posts);
-  const postsTest = getSinglePost(`blog/${params.posts}`);
-  console.log(postsTest)
+  //const postsTest = getSinglePost(`blog/${params.posts}`);
+
   
   const posts = {
     frontmatter: {
