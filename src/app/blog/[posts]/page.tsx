@@ -1,18 +1,37 @@
 import Card from "@/components/Card";
 import PageHeader from "@/components/PageHeader";
 import { getSinglePost } from "@/lib/utils/mdParser";
+import path from "path";
+import fs from 'fs';
+import matter from "gray-matter";
+
+    const contentDirectory = "src/content";
+
+    // Helper function to read file content
+    const readFile = (filePath: string) => {
+        return fs.readFileSync(filePath, "utf-8");
+    };
+
+    const page = ({ params } : { params: {posts:string}}) => {
+
+    
+    const fileName = `/blog/${params.posts}.md`;
+    const fullPath = path.join(contentDirectory,fileName);
+    console.log(fileName,fullPath);
+
+    const pageData = readFile(fullPath);
+    console.log(matter(pageData))
 
 
-const page = ({ params } : { params: {posts:string}}) => {
-  const postsTest = getSinglePost(`blog/${params.posts}`);
-  if(!postsTest) throw new Error("Page not found");
+    const { content, data: frontmatter } = matter(pageData);
+    //const postsTest = getSinglePost(`blog/${params.posts}`);
   
   const posts = {
     frontmatter: {
         title: "test",
         meta_title: "string",
         description: "string",
-        image: "string",
+        image: "/string",
         categories: ["string1","string2","string3"],
         author: "string",
         tags: ["string1","string2","string3"],
