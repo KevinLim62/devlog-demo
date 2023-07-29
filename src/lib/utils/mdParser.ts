@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
+const contentDirectory = 'src/content';
 
 const parseFrontmatter = (frontmatter: any) => {
   const frontmatterString = JSON.stringify(frontmatter);
@@ -9,8 +10,8 @@ const parseFrontmatter = (frontmatter: any) => {
 };
 
 export const getSinglePost = (fileName:string) =>{
-  const contentDirectory = 'src/content';
-  const fullPath = `${contentDirectory}/${fileName}.md`;
+  
+  const fullPath = path.join(contentDirectory,fileName);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { content, data: frontmatter } = matter(fileContents);
   

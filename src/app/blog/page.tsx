@@ -13,7 +13,7 @@ const page = () => {
        const allCategories = getAllTaxonomy(blog_folder, "categories");
        const categories = getTaxonomy(blog_folder, "categories");
        const tags = getTaxonomy(blog_folder, "tags");
-       const postIndex = getSinglePost("_index");
+       const postIndex = getSinglePost("_index.md");
        const posts =  getAllPosts("blog");
        const totalPages = Math.ceil(posts.length / pagination);
        

@@ -4,9 +4,8 @@ import { getSinglePost } from "@/lib/utils/mdParser";
 
 
 const page = ({ params } : { params: {posts:string}}) => {
-  console.log("params is ",params.posts);
-  //const postsTest = getSinglePost(`blog/${params.posts}`);
-
+  const postsTest = getSinglePost(`blog/${params.posts}`);
+  if(!postsTest) throw new Error("Page not found");
   
   const posts = {
     frontmatter: {
