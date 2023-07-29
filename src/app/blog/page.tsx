@@ -6,17 +6,20 @@ import PostSidebar from '@/components/PostSidebar';
 import { getAllPosts, getSinglePost } from '../../lib/utils/mdParser';
 import { getAllTaxonomy, getTaxonomy } from "@/lib/utils/taxonomParser";
 
-const pagination = 4;
 const blog_folder = "blog";
 
-const page = () => {
-    
+const page = ({ searchParams } : { searchParams: {[key: string]:string | string[] | undefined}}) => {
+
+       const page = searchParams['page'] ?? '1'
+       const per_page = searchParams['per_page'] ?? '4'
+       const start = (Number(page) - 1) * Number(per_page) // 0, 5, 10 ...
+       const end = start + Number(per_page) // 5, 10, 15 ...
        const allCategories = getAllTaxonomy(blog_folder, "categories");
        const categories = getTaxonomy(blog_folder, "categories");
        const tags = getTaxonomy(blog_folder, "tags");
        const postIndex = getSinglePost("_index.md");
        const posts =  getAllPosts("blog");
-       const totalPages = Math.ceil(posts.length / pagination);
+       const totalPages = Math.ceil(posts.length / Number(per_page));
        
       return (
            <>
@@ -24,11 +27,11 @@ const page = () => {
                 <PageHeader title={postIndex["frontmatter"].title}/>
                 <div className="lg:flex">
                     <div className="lg:w-[70%] space-y-10">
-                    <Searchbar searchList={posts}/>
+                    <Searchbar searchList={posts} start={start} end={end}/>
                     <Pagination
-                            section={blog_folder}
-                            currentPage={1}
-                            totalPages={totalPages}
+                        hasNextPage={end < posts.length}
+                        hasPrevPage={start > 0}
+                        totalPages={totalPages}
                         />
                     </div>
                     <div className="p-3 lg:w-[30%]">

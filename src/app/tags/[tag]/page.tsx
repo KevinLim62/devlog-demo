@@ -9,7 +9,7 @@ const posts:Post[] = getAllPosts("blog");
 const filterByTags = posts.filter((post) => {
   // Check if post.data.categories is defined and is an array
   return post.frontmatter.tags && Array.isArray(post.frontmatter.tags)
-    ? post.frontmatter.tags.map((tag) => tag.toLowerCase()).includes(params.tag)
+    ? post.frontmatter.tags.map((tag) => tag.toLowerCase()).includes(params.tag.toLowerCase())
     : false;
 });
 

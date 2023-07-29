@@ -15,9 +15,11 @@ export type SearchItem = {
 
 interface SearchbarProps {
   searchList: SearchItem[];
+  start: number;
+  end: number;
 }
 
-const Searchbar:React.FC<SearchbarProps> = ({ searchList }) => {
+const Searchbar:React.FC<SearchbarProps> = ({ searchList, start, end }) => {
 
   const [inputVal, setInputVal] = useState("");
   const [searchResults, setSearchResults] = useState<SearchItem[]>([]);
@@ -29,7 +31,7 @@ const Searchbar:React.FC<SearchbarProps> = ({ searchList }) => {
   useEffect(() => {
    const filterList = searchList.filter((item) => {
       return(item.frontmatter.title.trim().toLowerCase().includes(inputVal.toLowerCase()))
-    }).slice(0,4);
+    }).slice(start,end);
     setSearchResults(filterList)
   },[inputVal,searchList])
     
