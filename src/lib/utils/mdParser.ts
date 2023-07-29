@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const contentDirectory = 'content';
+
 
 const parseFrontmatter = (frontmatter: any) => {
   const frontmatterString = JSON.stringify(frontmatter);
@@ -10,7 +10,7 @@ const parseFrontmatter = (frontmatter: any) => {
 };
 
 export const getSinglePost = (fileName:string) =>{
-  
+  const contentDirectory = 'content';
   const fullPath = path.join(contentDirectory,fileName);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { content, data: frontmatter } = matter(fileContents);
@@ -22,7 +22,7 @@ export const getSinglePost = (fileName:string) =>{
 };
 
 export const getAllPosts = (folderName:string) => {
-  const contentDirectory = `src/content/${folderName}`;
+  const contentDirectory = `/content/${folderName}`;
   const files = fs.readdirSync(contentDirectory);
 
   const posts = files.map((file) => {
