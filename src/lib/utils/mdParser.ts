@@ -10,7 +10,7 @@ const parseFrontmatter = (frontmatter: any) => {
 };
 
 export const getSinglePost = (fileName:string) =>{
-  const contentDirectory = 'content';
+  const contentDirectory = 'public/content';
   const fullPath = path.join(contentDirectory,fileName);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { content, data: frontmatter } = matter(fileContents);
@@ -22,7 +22,7 @@ export const getSinglePost = (fileName:string) =>{
 };
 
 export const getAllPosts = (folderName:string) => {
-  const contentDirectory = `content/${folderName}`;
+  const contentDirectory = `public/content/${folderName}`;
   const files = fs.readdirSync(contentDirectory);
 
   const posts = files.map((file) => {
