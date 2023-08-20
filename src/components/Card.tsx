@@ -13,8 +13,8 @@ const Card:React.FC<Post> = ({
 
   return (
     <section>
-        <div className="w-full flex flex-col space-y-2">
-            <div className="w-full rounded-md bg-transparent overflow-hidden">
+        <div className="w-full flex flex-col space-y-2 p-2 border-[1px]">
+            <div className={`${isSinglePost? "w-[50vw]" : "w-[30vw] h-[50vh]"} mx-auto rounded-md bg-transparent overflow-hidden`}>
                 <Image 
                     alt="post_img"
                     src={frontmatter.image!}
@@ -24,7 +24,7 @@ const Card:React.FC<Post> = ({
                     quality={40}
                     style={{
                     width:'100%',
-                    height:'80%',
+                    height:'100%',
                     }}
                 />
             </div>

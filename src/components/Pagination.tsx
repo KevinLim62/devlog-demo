@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import React from "react";
 import { useRouter, useSearchParams } from 'next/navigation'
 
@@ -24,24 +23,24 @@ const Pagination:React.FC<PaginationProps> = ({
   return (
     <>
         <nav
-          className="flex items-center justify-center space-x-3"
+          className="flex items-center justify-center space-x-3 mt-5 mb-10"
           aria-label="Pagination"
           >
           {/* previous */}
             <button
               disabled={!hasPrevPage}
               onClick={() => {
-              router.push(`blog/?page=${Number(page) - 1}&per_page=${per_page}`)
+              router.push(`?page=${Number(page) - 1}&per_page=${per_page}`)
               }}
-              className="rounded px-2 py-1.5 text-white hover:bg-slate-600"
+              className={`rounded px-2 py-1.5 ${hasPrevPage? "text-white hover:bg-slate-600" : "text-slate-600"}  `}
             >
               <span className="sr-only">Previous</span>
               <svg
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
-                height="30"
-                width="30"
+                height="50"
+                width="50"
               >
                 <path
                   fillRule="evenodd"
@@ -52,7 +51,7 @@ const Pagination:React.FC<PaginationProps> = ({
             </button>
 
           {/* page index */}
-          <div>
+          <div className="text-lg">
             {page} / {totalPages}
           </div>
 
@@ -60,17 +59,17 @@ const Pagination:React.FC<PaginationProps> = ({
           <button
             disabled={!hasNextPage}
             onClick={() => {
-            router.push(`blog/?page=${Number(page) + 1}&per_page=${per_page}`)
+            router.push(`?page=${Number(page) + 1}&per_page=${per_page}`)
             }}
-            className="rounded px-2 py-1.5 text-white hover:bg-slate-600"
+            className={`rounded px-2 py-1.5 ${hasNextPage? "text-white hover:bg-slate-600" : "text-slate-600"}  `}
           >
               <span className="sr-only">Next</span>
               <svg
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
-                height="30"
-                width="30"
+                height="50"
+                width="50"
               >
                 <path
                   fillRule="evenodd"

@@ -1,18 +1,34 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import PageHeader from '@/components/PageHeader';
+import Searchbar from '@/components/Searchbar';
+import PostSidebar from '@/components/PostSidebar';
+import { getAllPosts, getSinglePost } from '@/lib/utils/mdParser';
+import { getAllTaxonomy, getTaxonomy } from "@/lib/utils/taxonomParser";
+
+const blog_folder = "blog";
 
 export default function Home() {
+
+  const allCategories = getAllTaxonomy(blog_folder, "categories");
+  const categories = getTaxonomy(blog_folder, "categories");
+  const tags = getTaxonomy(blog_folder, "tags");
+  const postIndex = getSinglePost("_index.md");
+  const posts =  getAllPosts("blog");
+
   return (
-    <section>
-      <div className='flex justify-center py-5 text-xl font-bold'>
-        Devlog_demo
-      </div>
-      <div className='h-[80vh] flex flex-col justify-center items-center gap-5'>
-        Main Page
-        <Link href={`/blog`} className='bg-slate-100 text-slate-900 py-2 px-3 border-2 rounded-full hover:text-white hover:bg-slate-900 hover:border-slate-100'>
-          Go to Blog Post
-        </Link>
-      </div>
+    <section className="w-full">
+        <PageHeader title={postIndex["frontmatter"].title}/>
+        <div className="lg:flex">
+            <div className="lg:w-[70%] space-y-10">
+            <Searchbar searchList={posts}/>
+            </div>
+            <div className="p-3 lg:w-[30%]">
+            <PostSidebar
+                categories={categories}
+                tags={tags}
+                allCategories={allCategories}
+                />
+            </div>
+        </div>
     </section>
   )
 }

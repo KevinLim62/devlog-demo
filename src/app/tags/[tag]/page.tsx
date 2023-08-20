@@ -1,8 +1,7 @@
-import Link from 'next/link';
 import { Post } from '@/types';
 import { getAllPosts } from '@/lib/utils/mdParser';
 import PageHeader from '@/components/PageHeader';
-import Card from '@/components/Card';
+import Searchbar from '@/components/Searchbar';
 
 const page = ({ params } : { params: {tag:string}}) => {
 const posts:Post[] = getAllPosts("blog");
@@ -19,13 +18,7 @@ const filterByTags = posts.filter((post) => {
         <PageHeader title={params.tag} />
         <div className="lg:flex">
             <div className="lg:w-full space-y-5">
-                <div className="grid grid-flow-row grid-cols-2 gap-5 mx-5">    
-                    {filterByTags && filterByTags.map((post) => (
-                        <Link key={post.fileName} href={`/blog/${post.fileName}`}>
-                            <Card frontmatter={post.frontmatter} content={post.content}/>
-                        </Link>
-                    ))}
-                </div>
+                <Searchbar searchList={filterByTags} searchDisabled/>
             </div>
         </div>
       </section>
