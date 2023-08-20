@@ -1,7 +1,7 @@
 "use client";
 
 import { Post } from '@/types';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import Card from './Card';
 import Link from 'next/link';
@@ -40,11 +40,12 @@ const Searchbar:React.FC<SearchbarProps> = ({ searchList, searchDisabled }) => {
     e.preventDefault();
   };
 
-  useEffect(() => {
+  useMemo(() => {
     if(page != '1' && inputVal != ""){
-      router.push(`?page=1&per_page=${per_page}`)
+      router.push(`?page=1&per_page=${per_page}`);
+      setInputVal(inputVal);
     }
-  },[page,inputVal])
+  },[inputVal])
 
   useEffect(() => {
    const filterList = searchList.filter((item) => {
