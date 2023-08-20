@@ -37,7 +37,7 @@ const Searchbar:React.FC<SearchbarProps> = ({ searchList, searchDisabled }) => {
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setInputVal(e.currentTarget.value);
-    e.stopPropagation();
+    e.preventDefault();
   };
 
   useEffect(() => {
