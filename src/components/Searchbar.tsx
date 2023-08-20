@@ -47,7 +47,7 @@ const Searchbar:React.FC<SearchbarProps> = ({ searchList, searchDisabled }) => {
     setSearchResults(filterList)
     setTotalPages(Math.ceil(filterList.length / Number(per_page)))
     
-  },[inputVal,searchList])
+  },[inputVal,searchList,per_page])
 
   return (
     <section className="w-full">
