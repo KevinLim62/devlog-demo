@@ -37,8 +37,14 @@ const Searchbar:React.FC<SearchbarProps> = ({ searchList, searchDisabled }) => {
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setInputVal(e.currentTarget.value);
-    router.push(`?page=1&per_page=${per_page}`);
+    e.stopPropagation();
   };
+
+  useEffect(() => {
+    if(page != '1' && inputVal != ""){
+      router.push(`?page=1&per_page=${per_page}`)
+    }
+  },[page,inputVal])
 
   useEffect(() => {
    const filterList = searchList.filter((item) => {
@@ -47,7 +53,7 @@ const Searchbar:React.FC<SearchbarProps> = ({ searchList, searchDisabled }) => {
     setSearchResults(filterList)
     setTotalPages(Math.ceil(filterList.length / Number(per_page)))
     
-  },[inputVal,searchList,per_page])
+  },[inputVal,searchList])
 
   return (
     <section className="w-full">
